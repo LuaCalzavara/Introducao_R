@@ -1,0 +1,711 @@
+---
+title: "Introdução à R para Cientistas sociais"
+subtitle: "Seminário Discente IESP-UERJ 2023"
+author: "Luana Calzavara - Doutorando em Ciência Política IESP-UERJ - luacalzavara@iesp.uerj.br"
+date: "`r format(Sys.time(), '%d/%m/%y')`"
+output: html_document
+---
+
+
+
+<center>![Possibilidades no R - Fonte: "Illustrations from the Openscapes blog Tidy Data for reproducibility, efficiency, and collaboration by Julia Lowndes and Allison Horst", dispinível em https://allisonhorst.com/other-r-fun](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/209ee1eb-fd83-4e4c-9bed-82ae43b0f3e9.jpg?h=ee5d5bcd70b903b651cd35f5546e3431){ width=80% }
+</center>
+
+
+## Objetivo do curso
+
+Introdução a R inclui ter noções de programação, conhecer o ambiente do Rstudio e se familiarizar com funções de manuseio de data-sets.
+
+
+* R: gratuito e *open source*. Uma linguaguem que permite aos usuários manipular dados, realizar operações, construir modelos estatísticos, mapas, dashboards, e milhares de outras funcionalidades.
+Muito importante para reprodutibilidade na ciência.
+
+### Conhecendo do RStudio
+
+O RStudio é o ambiente de desenvolvimento onde iremos utilizar a linguagem R.
+
+<center> [RStudio, fonte: https://docs.posit.co/ide/user/ide/get-started/](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdocs.posit.co%2Fide%2Fuser%2Fide%2Fget-started%2F&psig=AOvVaw2OHmHYu1jfpFw3M9baWIYy&ust=1699526235103000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNDt8d-atIIDFQAAAAAdAAAAABAD)
+
+## Fundamentos da programação
+
+Antes de tudo, quando estamos utilizando R, é bom que possamos compreender o que é programar.
+De forma simplificada, o que estamos fazendo é nos comunicar com o computador de forma eficaz, para que ele nos retorne o que precisamos no decorrer de nossas pesquisas.
+
+Porém, o computador não entende português, inglês, etc. O que ele entende são *bits*. Nesse sentido, a ciência da computação desenvolve e trabalha com diferentes tipo de linguagens para seus projetos, com diferentes objetivos.
+
+* Diferente de programas como o Excel onde você utiliza o *point-clik* para fazer alterações em uma planilha, com linguagem de programação, nós escrevemos códigos, rotinas, *scripts*, onde descrevemos os comandos que desejamos operacionalizar.
+E isso é importante pois nos permite _reprodutibilidade_.
+
+
+* Esses códigos, como qualquer outra língua, obedece a certas regras. Nesse caso, estamos produzindo **Algoritimos**
+* Escrever um código é como escrever um texto:
+1. Você precisa conhecer a língua do seu interlocutor para efetivar a comunicação
+2. O que está sendo escrito precisa ter coesão, precisa ter lógica para ser compreendido
+
+
+
+**Lógica de programação** são estruturas comuns à todas as linguagens de programação. Seja ela R, Python, C++, JAVA, etc
+
+Podem tem diferentes formas de escrita, algumas com mais possibilidades e aplicabilidade que outras, mas possuem as mesmas lógica. Contruimos, então, **algoritmos** em nossos *scripts* para comunicar ao R o que queremos fazer.
+
+* **Algoritimos** são, por tanto, instruções, como receitas de bolo ou um manual, que traduz passa-a-passo o que deve ser feito. As indicações devem estar escritas em um sequência _lógica_
+
+Devemos nos atentar a dar insturções exatas do que deve ser feito, como podemos ver em [nesse vídeo.](https://www.youtube.com/watch?v=pdhqwbUWf4U&t=179s)
+
+Para nos auxiliar na escritas dos _algoritmos_, existem certos operadores:
+
+### Operadores aritiméticos
+
+São símbolos matemáticos que nos permitem fazer operações aritméticas, como soma, subtração, etc.
+
+<center>
+| Operador       | Símbolo |
+| -------------- |:-------:| 
+| Adição         | +       |
+| Subtração      | -       |
+| Multiplicação  | *       |
+| Divisão        | /       |
+| Exponenciação  | ^ ou ** |
+| Módulo         | %%      |
+</center>
+
+
+* Exemplos:
+
+```{r}
+5 + 5
+```
+```{r}
+48 - 5 
+```
+```{r}
+8 * 5
+```
+```{r}
+35 / 5
+```
+```{r}
+9 ^ 2
+```
+```{r}
+9 ** 2
+```
+```{r}
+10 %% 2
+```
+```{r}
+11 %% 2
+```
+
+
+
+### Operadores relacionais (ou de comparação)
+
+Operadores relacionais são utilizados para podermos comparar duas variáveis. Tambem usamos para verificar se uma proposição é verdadeira ou não. São eles:
+
+<center>
+| Operador       | Símbolo |
+| -------------- |:-------:| 
+| Igual          | ==      |
+| Diferente      | !=      |
+| Maior          | >       |
+| Maior ou igual | >=      |
+| Menor          | <       |
+| Menor ou igual | <=      |
+</center>
+
+* Exemplos:
+
+```{r}
+8 > 5
+```
+```{r}
+6 < 10
+```
+```{r}
+(4+6) == (5+5)
+```
+```{r}
+(4+6) == (5+10)
+```
+```{r}
+(4+6) != (5+5)
+```
+```{r}
+7 >= (4 + 3)
+```
+
+
+
+### Operadore lógicos
+
+Os operadores lógicos se conectam com os operadores relacionais na medida em que o resultado de tais comparações são definidos como verdareiros, _TRUE_, ou falsos, _FALSE_. Estes são valores lógicos, ou booleanos, resultado de testes, de verificações. 
+
+Os operadores lógicos significam:  "e", teste simultâneo de duas condições (sendo verdadeiro quando ambas as condições são verdadeiras);"não", negação do valor booleano e "ou", teste alternativo, em que apenas uma das condições precisa ser verdadeira para retornar, TRUE.
+
+
+<center>
+| Operador | Símbolo |
+| -------- |:-------:| 
+| E        | &       |
+| Ou       | \|      |
+| Não      | !       |
+
+</center>
+
+
+* Exemplos:
+
+```{r}
+4 & 8 > 1
+```
+```{r}
+4 | 8 > 5
+```
+
+
+* Os operadores nos auxilião a manter a coesão da linguagem, a direcionar o R, a dar as instruções corretas. Quando escrevemos um código, queremos que fique claro o que deve ser feito.
+
+
+## Estruturas Sequenciais
+
+### Estruturas de decisão : se-então-senão
+
+Esta estrutura, basicamente, é utilizada para avaliar uma expressão lógica, determinando se ela é *TRUE* ou *FALSE*. Caso seja verdadeira, um comando é executado. Logo, é uma estrutura _condicional_. Pro exemplo: O comando _a_ só pode ocorrer, se a estrutura lógica _b_ for verdadeira.
+
+
+Exemplo condicional -- Quando utilizamos o if, a estrutura lógica em parênteses é verificada pelo R. Se a condição é atendida, se ela é verdadeira, o passo seguinte que está contido dentro das "{ }"chaves é realizado.
+
+A estrutura é:
+if (condição) {comando a ser executado se a condição for verdadeira}
+
+* Exemplos:
+
+```{r}
+x <- (-5)
+
+if (x < 0){
+  z <- (-x)
+}
+
+print(z)
+```
+
+E quando a condição não é atendida ?
+
+```{r}
+# x <- 5
+# 
+# if (x < 0){
+#   y <- (-x)
+# }
+# 
+# print(y)
+
+# Error in print(y) : object 'y' not found
+```
+Nessas situações, um ERROR surge, porque o R não conseguiu completar a operação.
+Uma alternativa que temos é utilixar _else_:
+```{r}
+x <- (5)
+
+if (x < 0){
+  
+  y <- -x
+  print(y)
+  
+} else {
+
+    print("o valor de x não é negativo")
+}
+
+```
+
+
+```{r}
+votos <- 800
+
+if (votos > 700){
+  status <- "eleito"
+} else{
+  status <- "não eleito"
+}
+
+print(status)
+
+```
+
+Adicionando mais uma condição
+```{r}
+if (votos > 1200){
+  status <- "eleito"
+} else if (votos > 700  & votos <= 1200){
+  status <- "suplente"
+} else {
+  status <- "nao eleito"
+}
+
+print(status)
+```
+
+
+
+
+### Estrutura de repetição: _for loop_
+
+**for loop**: significa, para todo i, de a até b, realize o seguinte comando.
+Para todos os elementos contidos na sequência indicada entre parêntese, faça a seguinta tarefa. Repita tal operação até que todos os casos da sequência delimitada seja findada.
+
+Geralmente usamos i como contador, mas pode adotar qualquer nome. No nosso exemplos, utilizamos a 'sigla' como contador  dentro da sequência denominada 'partidos', que contém um total de 5 siglas.
+
+
+```{r}
+partidos <- c("pt", "psol", "pv", "pl", "psdb")
+for (sigla in partidos) {
+  print(sigla)
+}
+```
+
+```{r}
+for (sigla in partidos) {
+  sigla <- toupper(sigla)
+  print(sigla)
+}
+```
+
+## Objetos
+
+O R é uma linguagem orientada a objetos. E é com eles que trabalhamos, basicamente. Objetos são onde guardamos informações. Quando criamos um, ele aparece no nosso "Environment". Porém, elas ainda estão apenas na memória do R, e não no seu computador.
+Objetos podem ser vetores, data.frames, listas, etc. Quais quer informações guardadas para serem usadas novamente, são objetos.
+
+```{r}
+obj_unico <- 2
+
+```
+
+Quando temos essas informações guardadas, podemos realizar operação entre elas. Isto nos permite que realizemos operações entre elas.
+
+O símbolo **<-**, seta para a esquerda, significa _atribuição_. No windows, o atalho de teclado para utilizá-lo é "Alt - ".
+```{r}
+z <- 10
+z
+```
+No código acima, lê-se "armazenar o valor 10 no objeto z, ou z recebe o valor 10".
+
+
+Podemos também guardar o resultado de operações matemáticas em objetos.
+
+```{r}
+soma <- 5 + 5
+soma
+```
+
+```{r}
+x <- 5
+y <- 3
+
+x + y
+x - y
+x / y
+x * y
+```
+Também podemos armazenaro o resultado de uma função em um objeto
+
+```{r}
+b <- sqrt(81)
+```
+```{r}
+b
+```
+
+* Como nomear objetos:
+1. Não pode começar com números. 
+2. Tente ser consiso e sintético sobre o que se trata o objeto
+3. O R é _case-sensitive_, então "a" !=(é diferente) "A".
+4. Existem formas como utilização: minha_base , minhaBase, MinhaBase
+
+
+## Vetores
+
+Vetores são formas uma forma contínua de armazenamento de memória do mesmo tipo de dado. 
+Vetores são como fileiras de objetos, que pode conter apenas um, ou milhares dele. Quando vetor tem apenas _uma_ informação, ele é um vetor atômico, ou unitário, um objeto simples. Todas as informação em R são guardadas em forma de vetor.
+
+
+```{r}
+c(1,5,7,9)
+```
+```{r}
+c("pt", "psol", "pv", "pl", "psdb")
+```
+```{r}
+1:20
+```
+```{r}
+seq(12,1)
+```
+```{r}
+vetor1 <- c(2, 4, 6, 8, 10) #vetor com números inteiros
+vetor2 <- c(2, "2", "dois") # vetor onde o R lê todos os dados como caracteres.
+```
+
+```{r}
+class(vetor1)
+```
+```{r}
+class(vetor2)
+```
+
+
+## Funções 
+
+O R possui funções que vem originalmente instaladas, ou acrescentadas segundo pacotes que os seus usuários desenvolvem.  Funções são como 'caixas transformadoras', onde você fornece uma ou mais informação, que são chamados de _argumentos_ ou _parâmetros_, e te devolvem um resultado.
+
+* Exemplo, funções básicas pré-instaladas no R
+
+```{r}
+sum(5,5)
+```
+```{r}
+log(8)
+```
+```{r}
+sqrt(81)
+```
+As funções são seguidas (), parênteses, onde são expressos os argumentos necessários para executar tal função.
+
+* Podemos aplicar função sobre os vetores
+
+```{r}
+vetor3 <- c(0.382,0.714,0.926,0.149,0.537,0.893,0.245,0.661,0.428,0.775)
+vetor3
+```
+Podemos calcular a média:
+```{r}
+mean(vetor3)
+```
+o desvio padrão:
+```{r}
+sd(vetor3)
+```
+
+### Pedindo ajuda
+```{r}
+?tolower
+```
+```{r}
+help("tolower")
+```
+
+
+##  Manipulanndo bases de dados
+
+
+O R é muito utilizado como um recurso para análise de dados. Podemos criar bases de dados dentro do próprio R, ou importá-las. Como nosso tempo é curto e como na maioria das vezes os dados vem de fontes externas como, por exemplo, IBGE ou TSE, vamos importar uma base.
+
+### Data.frame
+
+OK. Mas o que são base de dados ?
+No R, as bases são chamadas de _data.frame_. São estruturas que armazenam informações, onde cada coluna é uma variável, e cada linha é uma observação. _Data.frame_ são matrizes, onde cada coluna é um vetor. O que nos permite, posteriormente, museálas e aplicar funções sobre.
+
+Por exemplo:
+
+ Ano eleitoral | Candidato        | Partido | Votos        | 
+ :------------:| :---------------:|:-------:| ------------:|
+  2022         | Claudio Castro   | PL      | 4.930.288    | 
+  2022         | Marcelo Freixo   | PSB     | 2.300.980    | 
+  2022         | Rodrigo Neves    | PDT     | 672.291      | 
+  2022         | Paulo Ganime     | NOVO    | 446.580      | 
+
+
+
+
+
+### Abrindo arquivos no R
+
+#### Primeiro,vamos ter certeza de onde estamos. 
+
+* Em nosso minicurso, teremos como exemplo a manipulação da base de dados referente ao resultado eleitoral no Acre em 2018.
+
+Localizar a pasta em que estamos trabalhando nos ajuda a importar o dados com mais facilidade. O ideal é que tenhamos scripts e arquivos no mesmo _workspace_, na mesma pasta de trabalho dentro do seu computador, para facilitar a importação e exportação de arquivos.
+
+* Vamos descobrir em qual pasta estamos trabalhando no momento
+
+```{r}
+getwd() # diz a localização atual
+```
+Se quisermos redirecionar para uma outra pasta.
+
+```{r}
+# setwd() 
+
+```
+Observem qeu eu usei o "#" e a função mudou de cor. Isso acontece porque eu _comentei_ o código. Durante a nosso script, eu posso usar a "#" para duas coisas:
+1. para fazer comentário, como no caso mais acima do _getwd_, ao lando da função
+2. Se eu não quero rodar alguma função, eu comento ela, como no exemplo de _setwd_.
+
+No meu caso, como eu não quero alterar a pasta de trabalho, eu deixei a função comentada com uma "#".
+
+## Instalação de pacotes
+
+O R possui funções já instaladas nele, o _base R_. Mas o legal dele é que há uma gama de funções desenvolvidas por usuárias, compiladas em pacotes (ou _packages_, em inglês), que estão disponível para download. Você mesmo pode desenvolver um. Elas estão armazenadas no CRAN (Comprehensive R Archive Network) ou no Github. Os pacotes expandem as capacitades do R.
+
+Vamos instalar 2 pacotes que nos auxiliam no manuseio de dados:
+```{r}
+# install.packages("rio") Pacote que nos auxilia a importar e exportar dados de diveros tipos
+
+
+# install.packages("tidyverse") # um pacote que contém vários pacotes dentro de si, entre um dos principais e que iremos utilizar para manuseio de dados está o dplyt
+
+```
+
+Reparem que no meu código, a função install.packages() está comentada (existe uma # antes dela), pois já tenho instalada em meu computador. Uma vez instalada, não é necessário utilizar este código novamente. Se depois de algum tempo, se você rodar mais uma vez esta função, o que ocorrerá é uma _update_ do pacote, caso exista.
+
+Se olharmos em nosso ambiente, na parte de outputs, podemos ver uma aba "Packages". Lá estão todos os pacotes que vem originalmente com o R mais aqueles que você instalou. São muitos, certos? Os únicos que o R executa automaticamante são os originais dele. O restante, você deve **"avisar"** ao R que vai usar. Fazemos isto da seguinte forma:
+
+```{r}
+library(rio)
+library(tidyverse)
+```
+
+Uma vez instalados, nos referimos aos pacotes como _libraries_ ou bibliotecas.
+
+Agora sim podemos utilizá-las!
+
+## Manipulação de dados
+
+Apresentaremos algumas das possibilidades que podem ser realizadas em uma base de dados no R.
+
+### 0. Importando base
+
+Vamos trabalhar com os resultados eleitorais do estado do Acre em 2018, disponível no [link](https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2018_AC.zip)
+
+* Fora do R
+1. Entre no site de dados abertosdo  TSE e faça o download dos dados os Acre 2018.
+2. Copie e cole o arquivo dentro da mesma pasta em que está o _script_ do R que você está utilizando. Para facilitar a sua vida, o ideal é que estejam ambos no mesmo diretório.
+
+* No seu _script_ R
+
+Para importarmos um arquivo, devemos indicar o local dele no computador. Quando ele está no mesmo ambiente que o script, só de colocar o nome + extesão(se é .csv, .txt, por exemplo), já encontramos o arquivo.
+
+Como descobrir o caminho do seu arquivo: clique com o botão direito sobre o arquivo > propriedades > local.
+Por exemplo, quero abrir o arquivo "minhaBASE.csv" está em minha área de Downsloads, nesse caso, meu caminho seria:
+"C:\\Users\\Lua\\Downloads\\minhaBASE.csv"
+Obs: para quem utiliza o R no Windowns, o caminho deve ser escrito com \\ (contra-barra dupla)
+
+```{r}
+base_acre_2018 <- import("votacao_secao_2018_AC.csv") #import é uma função do pacote rio
+```
+
+
+
+
+Agora chegamos a parte onde iremos mexer na base de dados. 
+
+
+### 1. Conhecendo a nossa base
+
+```{r}
+#View(base_acre_2018)
+
+```
+
+Com View() abrimos uma aba que nos permite visualizar todo o _data.frame_. Contudo, quando estamos lidando com bases muito grandes, não é possível percorrer com os olhos exaustivamente a base. Para isso, podemos olhar, só as primeiras, por exemplo:
+
+```{r}
+head(base_acre_2018) #retorna por padrão as 6 primeiras linhas
+```
+ou
+
+```{r}
+head(base_acre_2018, n = 10)
+```
+
+Para conhecer o tamanho da base, quantas variáveis (colunas) e observações (linhas):
+
+```{r}
+ncol(base_acre_2018) # número de colunas
+nrow(base_acre_2018) # número de linhas
+names(base_acre_2018) # nome das colunas
+```
+
+Para conhecer os tipos de variáveis:
+
+```{r}
+glimpse(base_acre_2018)
+```
+
+Fazendo um simples histograma da variável QT_VOTOS
+
+```{r}
+hist(base_acre_2018$QT_VOTOS)
+```
+
+
+### 2. Selecionando variáveis
+
+Podemos ver que são muitas linhas e muitas colunas. Colunas que nem sempre trazem informação necessária para nós.
+Vamos selecionar apenas as que nos interessam: 
+ANO_ELEICAO, NR_TURNO, DS_CARGO,NM_MUNICIPIO, NM_VOTAVEL, QT_VOTOS
+
+```{r}
+base <- base_acre_2018 %>% 
+  select(ANO_ELEICAO, NR_TURNO, DS_CARGO,NM_MUNICIPIO, NM_VOTAVEL, QT_VOTOS)
+```
+
+*Leia-se* 
+Eu estou atribuindo ao um novo objeto _data.frame_ chamado _base_, uma versão de _base_acre_2018_, onde está selecionada as seguintas colunas: ANO_ELEICAO, NR_TURNO, DS_CARGO,NM_MUNICIPIO, NM_VOTAVEL, QT_VOTOS
+
+*Atenção*
+Neste código utilizamos um outro elemento, o _pipe_, %>% . Este é um operador que vem com o pacote _tidyverse_, logo só podemos operá-lo uma vez que esteja carregado. Ele nos permite escrever de forma mais fluída as operações que desejamos rodar. Este mesmo código poderia ser escrito em _R base_, da seguinte forma:
+
+```{r}
+select(base_acre_2018, ANO_ELEICAO, NR_TURNO, DS_CARGO,NM_MUNICIPIO, NM_VOTAVEL, QT_VOTOS)
+```
+Pode não pareceber tão diferente, com apenas uma função. Mas veremos no final como o _tidyverse_ *otimiza* o código de forma que rodamos várias funções de uma única vez.
+
+
+Uma vez que você rode este código, em seu "Environment" estarão os dois _data.frame_, o que foi importado e um novo, que acabou de ser criado. O bom de criar um novo objeto ao realizar uma alteração muito significativa é que, caso ocorra algum engano, não precisamos importar novamente a base. Quando criamos uma nova base, a partir de alguma modificação que desejamos realizar, evitamos sobrescrever o objeto. Não perdemos o original.
+
+Vamos olhar novamente como está nossa base:
+
+```{r}
+head(base)
+```
+
+
+### 3. Selecionando linhas
+
+Sabemos que nas eleições de 2018, vários cargos estavam em disputa. Quais são eles?
+
+```{r}
+unique(base$DS_CARGO) #utilizando R base com uma funçaõ que nos retorna os valores ÚNICOS da coluna DS_CARGO
+```
+
+Vamos trabalhar só com Deputado Federal. Para isso devemos filtrar apenas as linhas de DS_CARGO que contenam "DEPUTADO FEDERAL" 
+
+```{r}
+base <- base %>% 
+  filter(DS_CARGO == "DEPUTADO FEDERAL")
+```
+
+Repare que eu utilizo o operador relacional == para que o R apenas as linhas exatas que contém os candidatos ao cargo de deputado federal.
+
+Se, por acaso, o nosso recorte, o nosso filtro, fosse quantidade de votos, poderíamos utilizar o seguinte código:
+
+```{r}
+base %>% 
+  filter(QT_VOTOS >= 150)
+```
+
+No cósido acima, eu não atribui, não utilizei "<-", a um objeto. Logo, o R me retornou um _data.frame_ no console, mas ele não foi salvo. Meu objeto _base_ não foi alterado por esse filtro em específico.
+
+Vamos olhar como está a nossa base novamente:
+
+```{r}
+glimpse(base)
+```
+### 4. Agrupando informações
+
+Olhando a nossa base, vemos que o nome dos candidatos se repetem por todos os muninícipio que eles foram votados. 
+Para conhecer o voto total de cada candidato temos que sumarizar a coluna QT_VOTOS.
+
+```{r}
+base %>% 
+  group_by(NM_VOTAVEL) %>% 
+  summarise(voto_candidato = sum(QT_VOTOS))
+```
+
+Vamos, agora, observar o total de votos válidos nos munucípios:
+
+```{r}
+base %>% 
+  group_by(NM_MUNICIPIO) %>% 
+  summarise(voto_valido_municipio = sum(QT_VOTOS))
+```
+
+Mas note que com o recurso summarizar, perdemos as outras colunas. Então, é válido que aqui criemos um novo objeto para não subescrever o anterior. Seguimos, então, com voto por município.
+
+```{r}
+base_municipio <- base %>% 
+  group_by(NM_MUNICIPIO) %>% 
+  summarise(voto_valido_municipio = sum(QT_VOTOS))
+```
+
+Podemos acrescentar novas colunas usando a função _mutate_, responsável por criar colunas, e adicionar novamente informações
+
+```{r}
+base_municipio <- base_municipio %>% 
+  mutate(UF = "Acre", 
+         Eleicao = 2018)
+```
+
+Podemos extrair algumas estatíticas descritivas
+```{r}
+summary(base_municipio)
+```
+
+* Vamos recapitular os últimos passos, porém em um único bloco de comandos com o pipe. Se atente que em programação, a ordem dos fatores altera o produto.
+
+```{r}
+base_municipio2 <- base_acre_2018 %>% 
+  select(ANO_ELEICAO, NR_TURNO, DS_CARGO,NM_MUNICIPIO, NM_VOTAVEL, QT_VOTOS) %>% 
+  filter(DS_CARGO == "DEPUTADO FEDERAL") %>% 
+  group_by(NM_MUNICIPIO) %>% 
+  summarise(voto_valido_municipio = sum(QT_VOTOS)) %>% 
+  mutate(UF = "Acre", Eleicao = 2018)
+
+```
+
+Temos como resultado, a mesma base
+```{r}
+head(base_municipio2)
+```
+
+
+
+### 5. Exportando a base
+
+Para exportar, utilizaremos outra função do pacote _rio_. O funcionamento é muito parecido com o da importação. O importante é se atentar ao objeto que vai ser usado e qual o caminho você quer que ele tome.
+
+Se eu quero exportar para alguma pasta específica, nesse caso, "Downloads", eu utilizaria o seguinte caminho:
+
+```{r}
+export(base_municipio, "C:\\Users\\Lua\\Downloads\\base_final.csv") #São dois argumento: 1. o caminho de destino da base com o nome que eu quero exportar + o tipo (.csv); 2. o objeto
+??export
+```
+
+mas se eu quero exportar para a pasta onde está o script:
+```{r}
+export(base_municipio, "base_final.csv")
+```
+
+Reparem que eu escrevi "base_final.csv". Isso porque eu posso nomear da forma que quiser este objeto quando expotá-lo. Não precisa ser o mesmo utilizado dentro do ambiente do Rstudio.
+
+## Dicas finais
+
+**Programação é prática!**
+
+Recomendo que utilizem os livros que estão disponíveis online, leiam e reescrevam os códigos deles.
+
+o [Curso-R](https://livro.curso-r.com/3-2-r-como-calculadora.html) e [Introdução a Linguaguem R](https://pedropark99.github.io/Introducao_R/index.html) possuem exercícios para vocês praticarem!
+
+
+Obrigada!!
+
+
+## Referências
+
+DAMIANIE, et al.  Ciência de dados em R. https://livro.curso-r.com/index.html. 2022
+
+https://medium.com/ibmec-quant/iniciando-os-estudos-em-r-50667364fff4
+
+http://cursos.leg.ufpr.br/ecr/
+
+DAURICIO, Juliana. Algoritmos e Lógica de Programação. Editora Educacional. Londrina, 2015
+
+MEIRELES, Fernando e SILVA, Denisson. Usando R: Um Guia para Cientistas Políticos http://electionsbr.com/livro/index.html . 2018
+
+WICKHAM, Hadley e GROLEMUND, Garret. R for Data Science https://r4ds.had.co.nz/index.html. 2017
+
+
+FARIA, Pedro Duarte. Introdução à Linguagem R: seus fundamentos e sua prática. 4. ed. Belo Horizonte: [s.n.], 2022. ISBN 978-65-00-57872-0. Disponível em: https://pedropark99.github.io/Introducao_R/
